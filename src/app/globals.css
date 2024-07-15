@@ -57,3 +57,8 @@
       @apply bg-background text-foreground;
     }
   }
+
+  /* cant find the tw property for this for some reason */
+  .arrow {
+    transform-box: fill-box;
+  }
