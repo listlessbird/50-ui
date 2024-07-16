@@ -17,6 +17,10 @@ const navItems = [
     label: "Accordion",
     href: "/accordion",
   },
+  {
+    label: "game-list",
+    href: "game-list",
+  },
 ];
 
 export default function RootLayout({
