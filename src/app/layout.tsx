@@ -21,6 +21,10 @@ const navItems = [
     label: "game-list",
     href: "game-list",
   },
+  {
+    label: "date-time-picker-compact",
+    href: "date-time-picker-compact",
+  },
 ];
 
 export default function RootLayout({
