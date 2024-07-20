@@ -15,7 +15,7 @@ export function PickerList<T>({
   selected,
 }: PickerListProps<T>) {
   const listRef = useRef<HTMLDivElement>(null);
-  const itemsRef = useRef<HTMLDivElement[]>([]);
+  const itemsRef = useRef<Map<T, HTMLDivElement>>(new Map());
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,10 +24,10 @@ export function PickerList<T>({
       const listRect = listRef.current.getBoundingClientRect();
       const overlayCenter = listRect.top + listRect.height / 2;
 
-      let closestIndex = 0;
+      let closestIndex: T | null = null;
       let minDistance = Infinity;
 
-      itemsRef.current.forEach((item, index) => {
+      itemsRef.current.forEach((item, contentAsKey) => {
         const itemBounds = item.getBoundingClientRect();
         const itemCenter = itemBounds.top + itemBounds.height / 2;
 
@@ -35,22 +35,43 @@ export function PickerList<T>({
 
         if (d < minDistance) {
           minDistance = d;
-          closestIndex = index;
+          closestIndex = contentAsKey;
         }
       });
-      onSelect(data[closestIndex]);
+
+      if (closestIndex !== null && closestIndex !== selected) {
+        onSelect(closestIndex);
+      }
     };
 
     const list = listRef.current;
 
     list?.addEventListener("scroll", handleScroll);
 
-    handleScroll();
+    // handleScroll();
 
     return () => {
       list?.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  useEffect(() => {
+    const selectedElement = itemsRef.current.get(selected);
+    if (selectedElement && listRef.current) {
+      const listRect = listRef.current.getBoundingClientRect();
+      const itemRect = selectedElement.getBoundingClientRect();
+      const scrollTop = listRef.current.scrollTop;
+      const targetScrollTop =
+        scrollTop +
+        (itemRect.top - listRect.top) -
+        (listRect.height - itemRect.height) / 2;
+
+      listRef.current.scrollTo({
+        top: targetScrollTop,
+        behavior: "smooth",
+      });
+    }
+  }, [selected]);
 
   return (
     <div className="size-full relative overflow-hidden">
@@ -64,10 +85,13 @@ export function PickerList<T>({
           scrollPaddingBlock: `calc(50% - 2rem)`,
         }}
       >
-        <div className="h-48" />
+        {/* <div className="h-48" /> */}
+        <div className="h-[calc(50%-2rem)]" />
         {data.map((d, idx) => (
           <div
-            ref={(el) => (itemsRef.current[idx] = el)}
+            ref={(el) => {
+              if (el) itemsRef.current.set(d, el);
+            }}
             key={idx}
             className={cn(
               "bg-transparent hover:bg-transparent text-white h-16 snap-center flex items-center justify-center p-2 tabular-nums transition-all opacity-30 ",
@@ -79,7 +103,8 @@ export function PickerList<T>({
             {renderItem(d)}
           </div>
         ))}
-        <div className="h-48" />
+        {/* <div className="h-48" /> */}
+        <div className="h-[calc(50%-2rem)]" />
       </div>
     </div>
   );
