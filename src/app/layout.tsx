@@ -22,8 +22,8 @@ const navItems = [
     href: "game-list",
   },
   {
-    label: "date-time-picker-compact",
-    href: "date-time-picker-compact",
+    label: "time-picker-compact",
+    href: "time-picker-compact",
   },
 ];
 
