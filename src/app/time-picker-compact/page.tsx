@@ -46,17 +46,6 @@ export function Picker() {
         >
           <div className="flex flex-col items-center">
             <div className="text-white">Pick time</div>
-            {/* <motion.p
-            className="text-muted-foreground/60 tabular-nums"
-            animate={{ y: 0, filter: "blur(0px)" }}
-            initial={{ y: -10, filter: "blur(10px)" }}
-          >
-            <AnimatedNumber value={selectedTime.hour} />:
-            <AnimatedNumber
-              value={selectedTime.minute.toString().padStart(2, "0")}
-            />{" "}
-            <AnimatedNumber value={selectedTime.period} />
-          </motion.p> */}
 
             <div className="text-muted-foreground/60 tabular-nums flex">
               <AnimatePresence initial={false}>

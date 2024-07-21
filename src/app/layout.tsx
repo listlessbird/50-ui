@@ -25,6 +25,10 @@ const navItems = [
     label: "time-picker-compact",
     href: "time-picker-compact",
   },
+  {
+    label: "feedback-popover",
+    href: "feedback-popover",
+  },
 ];
 
 export default function RootLayout({
