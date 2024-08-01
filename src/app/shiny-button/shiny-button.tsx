@@ -4,7 +4,9 @@ import "./style.css";
 export function ShinyButton() {
   return (
     <motion.button
+      // @ts-ignore
       initial={{ "--x": "100%", scale: 1 }}
+      // @ts-ignore
       animate={{ "--x": "-100%" }}
       className="px-6 py-2 rounded-md rad-grad relative"
       whileTap={{ scale: 0.95 }}
