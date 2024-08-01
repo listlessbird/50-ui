@@ -29,6 +29,10 @@ const navItems = [
     label: "feedback-popover",
     href: "feedback-popover",
   },
+  {
+    label: "shiny button",
+    href: "shiny-button",
+  },
 ];
 
 export default function RootLayout({
