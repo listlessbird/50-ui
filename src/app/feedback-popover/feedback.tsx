@@ -38,7 +38,7 @@ export function FeedbackPopover() {
             ref={ref}
           >
             <div className="flex flex-col relative bg-white border-[#e6e7e8] border-solid border rounded-md w-full">
-              <AnimatePresence mode="popLayout">
+              <AnimatePresence initial={false}>
                 {formState === "success" ? (
                   <motion.div
                     key={"form"}
