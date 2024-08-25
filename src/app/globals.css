@@ -2,12 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @layer base {
   /* TODO
     uncomment this when light mode is setup (probably never :p)
   */
-    /* :root {
+  /* :root {
       --background: 240 23% 95%;
       --foreground: 228 20% 5%;
       --card: 240 23% 95%;
@@ -29,36 +28,67 @@
       --ring: 236 63% 40%;
       --radius: 0.5rem;
     } */
-   
-    :root {
-      --radius: 0.5rem;
-      --background: 240 25% 5%;
-      --foreground: 228 19% 95%;
-      --card: 240 25% 5%;
-      --card-foreground: 228 19% 95%;
-      --popover: 240 25% 5%;
-      --popover-foreground: 228 19% 95%;
-      --primary: 236 40% 73%;
-      --primary-foreground: 240 25% 5%;
-      --secondary: 236 51% 33%;
-      --secondary-foreground: 228 19% 95%;
-      --muted: 240 25% 80%;
-      --muted-foreground: 228 19% 95%;
-      --accent: 236 63% 57%;
-      --accent-foreground: 228 19% 95%;
-      --destructive: 0 62% 30%;
-      --destructive-foreground: 227 18% 10%;
-      --border: 240 25% 60%;
-      --input: 240 25% 80%;
-      --ring: 236 63% 60%;
-    }
 
-    body{
-      @apply bg-background text-foreground;
-    }
+  :root {
+    --radius: 0.5rem;
+    --background: 240 25% 5%;
+    --foreground: 228 19% 95%;
+    --card: 240 25% 5%;
+    --card-foreground: 228 19% 95%;
+    --popover: 240 25% 5%;
+    --popover-foreground: 228 19% 95%;
+    --primary: 236 40% 73%;
+    --primary-foreground: 240 25% 5%;
+    --secondary: 236 51% 33%;
+    --secondary-foreground: 228 19% 95%;
+    --muted: 240 25% 80%;
+    --muted-foreground: 228 19% 95%;
+    --accent: 236 63% 57%;
+    --accent-foreground: 228 19% 95%;
+    --destructive: 0 62% 30%;
+    --destructive-foreground: 227 18% 10%;
+    --border: 240 25% 60%;
+    --input: 240 25% 80%;
+    --ring: 236 63% 60%;
   }
 
-  /* cant find the tw property for this for some reason */
-  .arrow {
-    transform-box: fill-box;
+  body {
+    @apply bg-background text-foreground;
   }
+}
+
+/* cant find the tw property for this for some reason */
+.arrow {
+  transform-box: fill-box;
+}
+
+.comment {
+  position: relative;
+  padding-left: 30px;
+}
+
+.comment::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 15px; /* Adjust this according to your layout */
+  width: 2px;
+  height: 100%;
+  background-color: #ccc; /* Connector color */
+}
+
+.comment::after {
+  content: "";
+  position: absolute;
+  top: 20px; /* Adjust this for the curve start point */
+  left: 15px;
+  width: 15px; /* Adjust for the curve width */
+  height: 15px;
+  border: solid #ccc;
+  border-width: 2px 0 0 2px;
+  border-radius: 0 0 0 100%;
+}
+
+.comment:first-child::before {
+  display: none; /* Remove the vertical line for the first comment */
+}

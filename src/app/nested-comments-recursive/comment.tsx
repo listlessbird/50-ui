@@ -132,9 +132,9 @@ function Comment({
   const [replyOpen, setReplyOpen] = useState(false);
 
   return (
-    <div className="bg-white text-black p-4 rounded-md">
-      {comment.id}
-      <p className="text-lg">{comment.text}</p>
+    <ul className="bg-white text-black p-4 rounded-md comment">
+      {/* {comment.id} */}
+      <li className="text-lg">{comment.text}</li>
       <div className="flex gap-4 text-sm">
         <button onClick={() => setEditOpen((p) => !p)}>Edit</button>
         <button onClick={() => setReplyOpen((p) => !p)}>Reply</button>
@@ -159,7 +159,7 @@ function Comment({
           })}
         </div>
       </div>
-    </div>
+    </ul>
   );
 }
 
