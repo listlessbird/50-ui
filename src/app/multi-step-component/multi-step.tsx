@@ -14,7 +14,7 @@ import useMeasure from "react-use-measure";
 const variant: Variants = {
   initial: (direction: number) => ({
     opacity: 0,
-    x: `${direction * 100}%`,
+    x: `${direction * 110}%`,
     filter: "blur(10px)",
   }),
   animate: {
