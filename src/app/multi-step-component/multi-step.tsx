@@ -1,12 +1,38 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, Variants } from "framer-motion";
 import { useMemo, useState } from "react";
 import useMeasure from "react-use-measure";
+
+/*
+    In case this doesnt work on other situatuations,
+    ie, the exit animation is not working as expected and overflowing the parent container,
+    set overflow to hidden on the parent container
+    and also use relative position on the parent container
+*/
+
+const variant: Variants = {
+  initial: (direction: number) => ({
+    opacity: 0,
+    x: `${direction * 100}%`,
+    filter: "blur(10px)",
+  }),
+  animate: {
+    opacity: 1,
+    x: "0%",
+    filter: "blur(0px)",
+  },
+  exit: (direction: number) => ({
+    opacity: 0,
+    x: `${direction * -110}%`,
+    filter: "blur(10px)",
+  }),
+};
 
 export function MultiStep() {
   const [step, setStep] = useState(1);
 
+  const [direction, setDirection] = useState(1);
   const [ref, { width, height }] = useMeasure();
 
   const steps = useMemo(() => {
@@ -23,19 +49,21 @@ export function MultiStep() {
   function handleNext() {
     if (step < 3) {
       setStep(step + 1);
+      setDirection(1);
       return;
     }
 
-    setStep(1);
+    // setStep(1);
   }
 
   function handleBack() {
     if (step > 1) {
       setStep(step - 1);
+      setDirection(-1);
       return;
     }
 
-    setStep(1);
+    // setStep(1);
   }
 
   return (
@@ -44,14 +72,19 @@ export function MultiStep() {
       animate={{ height: height }}
     >
       <div ref={ref} className="p-4">
-        <AnimatePresence initial={false} mode="popLayout">
+        <AnimatePresence initial={false} mode="popLayout" custom={direction}>
           <motion.div
-            initial={{ opacity: 0, x: "100%", filter: "blur(10px)" }}
-            animate={{ opacity: 1, x: "0%", filter: "blur(0px)" }}
-            exit={{ opacity: 0, x: "-110%", filter: "blur(10px)" }}
+            // initial={{ opacity: 0, x: "100%", filter: "blur(10px)" }}
+            // animate={{ opacity: 1, x: "0%", filter: "blur(0px)" }}
+            // exit={{ opacity: 0, x: "-110%", filter: "blur(10px)" }}
             transition={{ duration: 0.5, type: "spring", bounce: 0 }}
             className="px-2 text-balance"
             key={step}
+            variants={variant}
+            custom={direction}
+            initial="initial"
+            animate="animate"
+            exit="exit"
           >
             {steps}
           </motion.div>
