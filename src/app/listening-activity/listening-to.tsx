@@ -3,12 +3,12 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Terminus from "@/assets/terminus.jpg";
 import { Morph } from "@/app/listening-activity/morph";
-import { ProgressBar } from "@/app/listening-activity/progress-bar";
+import { Progress, ProgressBar } from "@/app/listening-activity/progress";
 
 export function ListeningTo() {
   return (
     <div
-      className="rounded-md w-[350px] h-[350px] overflow-hidden
+      className="rounded-[15%] w-[350px] h-[380px] overflow-hidden
         activity-root
     "
     >
@@ -23,7 +23,7 @@ export function ListeningTo() {
         />
       </div>
 
-      <div className="inner-data p-2 text-center">
+      <div className="inner-data p-2 text-center space-y-2">
         <div className="w-full flex items-center justify-center">
           <Morph />
         </div>
@@ -45,16 +45,16 @@ export function ListeningTo() {
           Terminus
         </motion.h1>
         <div className="w-full flex items-center justify-center">
-          <ProgressBar initialTime="04:30" totalTime="05:00" />
+          <ProgressBar initialTime="04:00" totalTime="05:00" />
         </div>
-        <motion.p
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
-          className="text-white font-mono"
+          className="text-black font-mono"
         >
-          A podcast about the people who build and use the web.
-        </motion.p>
+          <Progress initialTime="04:00" totalTime="05:00" />
+        </motion.div>
       </div>
     </div>
   );
