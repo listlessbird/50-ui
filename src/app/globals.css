@@ -112,7 +112,7 @@
   }
 
   .disc.reversing[data-expanded="true"] {
-    animation: rotateReverse 2s linear infinite forwards;
+    animation: rotateReverse 1s linear infinite forwards;
   }
 
   .disc.reversing[data-expanded="false"] {

@@ -17,6 +17,7 @@ const discVariants: Variants = {
     borderRadius: "0%",
     bottom: "0%",
     top: "0%",
+
     transition: {
       //   delay: 4,
       type: "spring",
@@ -51,14 +52,14 @@ export function ListeningTo() {
       setDiscClicked(false);
       setIsReversing(true);
       discControls.start("play");
-      setTimeout(() => setIsReversing(false), 2200);
+      setTimeout(() => setIsReversing(false), 1000);
     } else {
       setDiscClicked(true);
       setIsReversing(true);
       setTimeout(() => {
         setIsReversing(false);
         discControls.start("pause");
-      }, 2200);
+      }, 1000);
     }
   };
   return (
@@ -69,7 +70,7 @@ export function ListeningTo() {
       <div className="w-full h-[200px]">
         <motion.div
           className={cn(
-            "transition-transform overflow-hidden aspect-square object-cover disc z-10 w-full",
+            "transition-transform overflow-hidden aspect-square object-cover disc z-10 w-full shadow-xl",
             discClicked && "pause",
             isReversing && "reversing"
           )}

@@ -1,3 +1,4 @@
+import { AnimatedDigit } from "@/components/animated-digit";
 import { useProgress } from "@/hooks/use-progress";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
@@ -36,8 +37,17 @@ export function Progress({
   });
 
   return (
-    <div className="font-mono inline-flex gap-1 font-semibold">
-      <span className="text-black">{elapsed}</span>
+    <div className="font-mono inline-flex font-semibold items-center justify-center">
+      {/* <span className="text-black">{elapsed}</span> */}
+      {elapsed.split("").map((digit, index) =>
+        digit === ":" ? (
+          <span key={index} className="mx-0.5">
+            :
+          </span>
+        ) : (
+          <AnimatedDigit key={index} value={+digit} />
+        )
+      )}
       <span className="text-black/50">/</span>
       <span className="text-black/50">{totalTime}</span>
     </div>
