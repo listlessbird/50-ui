@@ -3,15 +3,16 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Terminus from "@/assets/terminus.jpg";
 import { Morph } from "@/app/listening-activity/morph";
+import { ProgressBar } from "@/app/listening-activity/progress-bar";
 
 export function ListeningTo() {
   return (
     <div
-      className="rounded-md w-[350px] h-[300px] overflow-hidden
+      className="rounded-md w-[350px] h-[350px] overflow-hidden
         activity-root
     "
     >
-      <div className="w-full relative h-[150px]">
+      <div className="w-full relative h-[200px]">
         <Image
           src={Terminus}
           alt="Terminus"
@@ -23,16 +24,28 @@ export function ListeningTo() {
       </div>
 
       <div className="inner-data p-2 text-center">
+        <div className="w-full flex items-center justify-center">
+          <Morph />
+        </div>
+
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5 }}
+          className="text-black/30 text-lg font-semibold font-mono"
+        >
+          Devola
+        </motion.p>
         <motion.h1
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
-          className="text-2xl font-bold text-white font-mono"
+          className="text-2xl font-semibold text-black/80 font-mono"
         >
           Terminus
         </motion.h1>
         <div className="w-full flex items-center justify-center">
-          <Morph />
+          <ProgressBar initialTime="04:30" totalTime="05:00" />
         </div>
         <motion.p
           initial={{ opacity: 0, y: 20 }}

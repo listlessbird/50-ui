@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
@@ -8,25 +7,25 @@ function getRandomInt(min: number, max: number) {
 }
 
 export function Morph() {
-  const [heights, setHeights] = useState([10, 10, 10, 10]);
+  const [scales, setScales] = useState([1, 1, 1, 1, 1, 1]);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setHeights((prevHeights) => prevHeights.map(() => getRandomInt(10, 50)));
+      setScales((prevScales) => prevScales.map(() => getRandomInt(1, 3)));
     }, 200);
-
     return () => clearInterval(interval);
   }, []);
 
   return (
     <div className="flex flex-col items-center">
-      <div className="flex gap-1 justify-center items-end h-[50px]">
-        {heights.map((height, i) => (
+      <div className="flex gap-1 justify-center items-center h-[30px]">
+        {scales.map((scale, i) => (
           <motion.div
             key={i}
-            animate={{ height }}
+            animate={{ scaleY: scale }}
             transition={{ type: "spring", stiffness: 300, damping: 20 }}
-            className="bg-black/30 w-1 rounded-t-full"
+            style={{ originY: 0.5 }}
+            className="bg-black/30 w-1 h-[10px]"
           />
         ))}
       </div>
