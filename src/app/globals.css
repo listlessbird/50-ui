@@ -103,8 +103,20 @@
     rgba(0, 212, 255, 1) 100%
   );
 
-  img {
+  .disc {
     animation: rotate 20s linear infinite forwards;
+  }
+
+  .disc[data-expanded="true"] {
+    animation: none;
+  }
+
+  .disc.reversing[data-expanded="true"] {
+    animation: rotateReverse 2s linear infinite forwards;
+  }
+
+  .disc.reversing[data-expanded="false"] {
+    animation: none;
   }
 }
 
@@ -114,5 +126,14 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+@keyframes rotateReverse {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
   }
 }
