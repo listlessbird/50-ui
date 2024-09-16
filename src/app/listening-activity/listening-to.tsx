@@ -70,7 +70,7 @@ export function ListeningTo() {
       <div className="w-full h-[200px]">
         <motion.div
           className={cn(
-            "transition-transform overflow-hidden aspect-square object-cover disc z-10 w-full shadow-xl",
+            "transition-transform overflow-hidden aspect-square object-cover disc z-10 w-full shadow-2xl cursor-pointer border-2 border-[#a89f9f]",
             discClicked && "pause",
             isReversing && "reversing"
           )}
@@ -88,6 +88,14 @@ export function ListeningTo() {
           animate={discControls}
           data-expanded={discClicked ? true : false}
           ref={ref}
+          whileHover={{
+            y: 10,
+            transition: {
+              type: "spring",
+              stiffness: 200,
+              damping: 0,
+            },
+          }}
         >
           <Image
             src={Terminus}
