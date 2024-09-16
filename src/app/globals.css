@@ -103,7 +103,7 @@
     rgba(0, 212, 255, 1) 100%
   );
 
-  .disc {
+  /* .disc {
     animation: rotate 10s linear infinite forwards;
   }
 
@@ -117,9 +117,9 @@
 
   .disc.reversing[data-expanded="false"] {
     animation: none;
-  }
+  } */
 }
-
+/* 
 @keyframes rotate {
   from {
     transform: rotate(0deg);
@@ -136,4 +136,4 @@
   to {
     transform: rotate(0deg);
   }
-}
+} */

@@ -12,56 +12,9 @@ import { Progress, ProgressBar } from "@/app/listening-activity/progress";
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 
-const discVariants: Variants = {
-  pause: {
-    borderRadius: "0%",
-    bottom: "0%",
-    top: "0%",
-
-    transition: {
-      //   delay: 4,
-      type: "spring",
-    },
-  },
-  play: {
-    borderRadius: "50%",
-    bottom: "50%",
-    top: "-40%",
-    transition: {
-      //   duration: 4,
-      type: "spring",
-    },
-  },
-};
-
 export function ListeningTo() {
   const [discClicked, setDiscClicked] = useState(false);
 
-  const [isReversing, setIsReversing] = useState(false);
-
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    console.log("showCover", discClicked);
-  }, [discClicked]);
-
-  const discControls = useAnimationControls();
-
-  const handleDiscClick = () => {
-    if (discClicked) {
-      setDiscClicked(false);
-      setIsReversing(true);
-      discControls.start("play");
-      setTimeout(() => setIsReversing(false), 1000);
-    } else {
-      setDiscClicked(true);
-      setIsReversing(true);
-      setTimeout(() => {
-        setIsReversing(false);
-        discControls.start("pause");
-      }, 1000);
-    }
-  };
   return (
     <div
       className="rounded-[15%] w-[350px] h-[380px] overflow-hidden
@@ -70,45 +23,54 @@ export function ListeningTo() {
       <div className="w-full h-[200px]">
         <motion.div
           className={cn(
-            "transition-transform overflow-hidden aspect-square object-cover disc z-10 w-full shadow-2xl cursor-pointer border-2 border-[#a89f9f]",
-            discClicked && "pause",
-            isReversing && "reversing"
+            "transition-transform overflow-hidden aspect-square object-cover disc z-10 w-full shadow-2xl cursor-pointer border-2 border-[#a89f9f]"
           )}
+          initial={{ rotate: 0, y: "-45%" }}
           style={{
             position: "absolute",
             borderRadius: "50%",
-            bottom: "50%",
-            // @ts-ignore
-            "--dur": "4s",
+            // bottom: "50%",
+            scale: 1,
           }}
-          onClick={handleDiscClick}
-          variants={discVariants}
-          //   animate={"pause"}
-          //   initial="play"
-          animate={discControls}
+          animate={
+            discClicked
+              ? {
+                  rotate: 0,
+                  borderRadius: 0,
+                  y: 0,
+                  border: 0,
+                  width: "100%",
+                  height: "100%",
+                  transition: {
+                    duration: 1.8,
+                    type: "spring",
+                    bounce: 0,
+                  },
+                }
+              : {
+                  rotate: 360,
+                  transition: {
+                    duration: 5,
+                    repeat: Infinity,
+                    ease: "linear",
+                  },
+                }
+          }
           data-expanded={discClicked ? true : false}
-          ref={ref}
-          whileHover={{
-            y: 10,
-            transition: {
-              type: "spring",
-              stiffness: 200,
-              damping: 0,
-            },
-          }}
+          whileHover={{ scale: 1.05 }}
+          onClick={() => setDiscClicked((p) => !p)}
         >
           <Image
             src={Terminus}
             alt="Terminus"
-            layout="responsive"
             width={400}
             height={400}
-            className={cn("aspect-square object-cover shadow-xl")}
+            className={cn("aspect-square object-cover shadow-xl size-full")}
           />
         </motion.div>
       </div>
       <motion.div
-        animate={discClicked && !isReversing ? { opacity: 0 } : {}}
+        animate={discClicked ? { opacity: 0 } : {}}
         className="absolute left-1/2 -top-[3%] z-[11] flex -translate-x-1/2 -translate-y-1/2 items-center justify-center"
       >
         <div className="size-[150px] absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gray-500/20 backdrop-blur-sm" />
