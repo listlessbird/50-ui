@@ -19,7 +19,7 @@ const rollVariants: Variants = {
   exit: { y: -20, opacity: 0 },
 };
 
-export function Picker() {
+function Picker() {
   const [open, setOpen] = useState(false);
 
   const [ref, bounds] = useMeasure();
