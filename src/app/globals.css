@@ -104,7 +104,7 @@
   );
 
   .disc {
-    animation: rotate 20s linear infinite forwards;
+    animation: rotate 10s linear infinite forwards;
   }
 
   .disc[data-expanded="true"] {
