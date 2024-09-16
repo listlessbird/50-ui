@@ -14,7 +14,7 @@ import { cn } from "@/lib/utils";
 
 export function ListeningTo() {
   const [discClicked, setDiscClicked] = useState(false);
-
+  const [reversing, setReversing] = useState(false);
   return (
     <div
       className="rounded-[15%] w-[350px] h-[380px] overflow-hidden
@@ -58,7 +58,17 @@ export function ListeningTo() {
           }
           data-expanded={discClicked ? true : false}
           whileHover={{ scale: 1.05 }}
-          onClick={() => setDiscClicked((p) => !p)}
+          onClick={() => {
+            setDiscClicked((p) => {
+              if (p) {
+                setReversing(true);
+                setTimeout(() => {
+                  setReversing(false);
+                }, 1800);
+              }
+              return !p;
+            });
+          }}
         >
           <Image
             src={Terminus}
@@ -81,7 +91,10 @@ export function ListeningTo() {
         <div className="size-[67px] absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#e3dee4]" />
         <div className="size-[60px] absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-[#a6a4a5] bg-[#bebcba] shadow-[0_0_24px_-12px_rgba(0,0,0,0.25)_inset]" />
       </motion.div>
-      <div className="inner-data p-2 text-center space-y-2">
+      <motion.div
+        className="inner-data p-2 text-center space-y-2"
+        animate={discClicked || reversing ? { filter: "blur(4px)" } : {}}
+      >
         <div className="w-full flex items-center justify-center">
           <Morph />
         </div>
@@ -113,7 +126,7 @@ export function ListeningTo() {
         >
           <Progress initialTime="04:00" totalTime="05:00" />
         </motion.div>
-      </div>
+      </motion.div>
     </div>
   );
 }
